@@ -2,6 +2,11 @@ import typing
 from typing import Literal, Union, Generic
 from typing_extensions import Buffer
 
+__version__: str
+
+ARAGORN_VERSION: str
+TRANSLATION_TABLES: typing.Set[int]
+
 class Gene:
     @property
     def type(self) -> str: ...
