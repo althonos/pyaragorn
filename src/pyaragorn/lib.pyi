@@ -20,6 +20,8 @@ class Gene:
     def strand(self) -> Literal[1, -1]: ...
     @property
     def energy(self) -> float: ...
+    @property
+    def raw_energy(self) -> float: ...
     def sequence(self) -> str: ...
  
 class TRNAGene(Gene):
@@ -64,6 +66,7 @@ class RNAFinder(Generic[G]):
         tmrna: Literal[False],
         trna: Literal[True] = True,
         linear: bool = False,
+        ps: float = 100.0,
     ) -> None: ...
     @typing.overload
     def __init__(
@@ -73,6 +76,7 @@ class RNAFinder(Generic[G]):
         trna: Literal[False],
         tmrna: Literal[True] = True,
         linear: bool = False,
+        ps: float = 100.0,
     ) -> None: ...
     @typing.overload
     def __init__(
@@ -82,6 +86,7 @@ class RNAFinder(Generic[G]):
         trna: bool = True,
         tmrna: bool = True,
         linear: bool = False,
+        ps: float = 100.0,
     ) -> None: ...
     def find_rna(
         self,

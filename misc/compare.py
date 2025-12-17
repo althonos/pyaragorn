@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
-import os
 import csv
-import typing
+import os
 import subprocess as sp
-from pathlib import Path
-from collections import namedtuple
+import typing
 from argparse import ArgumentParser
+from collections import namedtuple
+from pathlib import Path
+
+from Bio import SeqIO
+from xopen import xopen
 
 import pyaragorn
-from xopen import xopen
-from Bio import SeqIO
 
 
 class Gene(typing.NamedTuple):
@@ -21,7 +22,7 @@ class Gene(typing.NamedTuple):
     strand: int
 
 
-def aragorn_predict(genome: Path, txt_file: Path, aragorn_bin: Path, linear: bool, transl_table: int = 11):
+def aragorn_predict(genome: Path, txt_file: Path, aragorn_bin: Path, linear: bool, transl_table: int = 11, ps: float = 100.0):
     """
     Predict CDS with aragorn
     :param genome: Path to the genome (fasta)
@@ -30,6 +31,7 @@ def aragorn_predict(genome: Path, txt_file: Path, aragorn_bin: Path, linear: boo
     :param aragorn_bin: Path to the aragorn binary
     :param closed: Closed ends.
     :param transl_table: Translation table
+    :param ps: Scoring threshold percentage (default 100.0)
     """
     cmd = [
         aragorn_bin,
@@ -37,6 +39,7 @@ def aragorn_predict(genome: Path, txt_file: Path, aragorn_bin: Path, linear: boo
         '-wa',
         '-e',
         '-l' if linear else '-c',
+        f'-ps{ps}',
         f'-gc{transl_table}',
         str(genome),
     ]
@@ -104,7 +107,7 @@ def pyaragorn_predict(rna_finder: pyaragorn.RNAFinder, genome: Path) -> set[Gene
                     else:
                         kind = f"{kind}-{prediction.amino_acid}"
                 elif prediction.type == "tmRNA" and prediction.permuted:
-                    kind = f"tmRNA*"
+                    kind = "tmRNA*"
                 gene: namedtuple = Gene(record.id,
                                         kind,
                                         prediction.begin,
@@ -160,14 +163,15 @@ def parse_arguments():
                         help='Path to a newly compiled aragorn binary.')
     parser.add_argument('--linear', '-l', action='store_true', help='Closed ends. Do not allow genes to run off edges.')
     parser.add_argument('--output', '-o', type=Path, default=Path('./'), help='Output path (default="./comparison")')
+    parser.add_argument('--ps', '-p', type=float, default=100.0, help='Scoring threshold percentage (default=100.0)')
     args = parser.parse_args()
-    return args.genome, args.aragorn, args.linear, args.output
+    return args.genome, args.aragorn, args.linear, args.output, args.ps
 
 
 def main():
-    genomes, aragorn_bin, linear, out_path = parse_arguments()
+    genomes, aragorn_bin, linear, out_path, ps = parse_arguments()
     out_path.resolve()
-    print(f'Genomes linear={linear}')
+    print(f'Genomes linear={linear} ps={ps}')
 
     tsv_file = open(out_path.joinpath('mismatches.tsv'), mode='w')
     tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
@@ -189,10 +193,11 @@ def main():
         aragorn_predict(genome=genome,
                          txt_file=aragorn_txt_file,
                          aragorn_bin=aragorn_bin,
-                         linear=linear)
+                         linear=linear,
+                         ps=ps)
         aragorn_genes: set[dict] = parse_txt_output(txt_path=aragorn_txt_file)
         # Predict pyaragorn
-        rna_finder = pyaragorn.RNAFinder(11, linear=linear)
+        rna_finder = pyaragorn.RNAFinder(11, linear=linear, ps=ps)
         pyaragorn_genes: set[dict] = pyaragorn_predict(rna_finder=rna_finder,
                                                        genome=genome)
 
@@ -221,6 +226,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# EOF

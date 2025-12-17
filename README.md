@@ -60,7 +60,7 @@ command line:
 - [ ] Custom genetic code (`aragorn -gc<n>,BBB=<aa>`).
 - [x] Circular and linear topologies (`aragorn -c` | `aragorn -l`).
 - [ ] Intron length configuration (`aragorn -i`).
-- [ ] Scoring threshold configuration (`aragorn -ps`).
+- [x] Scoring threshold configuration (`aragorn -ps`).
 - [x] Sequence extraction from RNA gene (`aragorn -seq`).
 - [ ] Secondary structure extraction from each gene (`aragorn -br`).
 
@@ -172,4 +172,3 @@ the [Zeller Lab](https://zellerlab.org).*
 
 - <a id="ref1">\[1\]</a> Laslett, Dean, and Bjorn Canback. “ARAGORN, a program to detect tRNA genes and tmRNA genes in nucleotide sequences.” Nucleic acids research vol. 32,1 11-6. 2 Jan. 2004, [doi:10.1093/nar/gkh152](https://doi.org/10.1093/nar/gkh152)
 - <a id="ref2">\[2\]</a> Laslett, Dean, and Björn Canbäck. “ARWEN: a program to detect tRNA genes in metazoan mitochondrial nucleotide sequences.” Bioinformatics (Oxford, England) vol. 24,2 (2008): 172-5. [doi:10.1093/bioinformatics/btm573](https://doi.org/10.1093/bioinformatics/btm573)
-

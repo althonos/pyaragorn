@@ -187,6 +187,11 @@ cdef class Gene:
         default_sw(&sw) # FIXME?
         return aragorn.nenergy(&self._gene, &sw)
 
+    @property
+    def raw_energy(self):
+        """`float`: The un-normalized energy value of the RNA structure."""
+        return <double> self._gene.energy
+
     def sequence(self):
         """Retrieve the full sequence of the RNA gene.
         """
@@ -201,6 +206,14 @@ cdef class Gene:
 cdef class TRNAGene(Gene):
     """A transfer RNA (tRNA) gene.
     """
+
+    def __repr__(self):
+        return (
+            f"<TRNAGene begin={self.begin} end={self.end} "
+            f"strand={'+1' if self.strand == 1 else '-1'} "
+            f"length={self.length} anticodon={self.anticodon!r} "
+            f"energy={self.energy:.2f}>"
+        )
 
     @property
     def amino_acid(self):
@@ -292,6 +305,14 @@ cdef class TMRNAGene(Gene):
         'AEKNEENFEMPAFMINNASAGANYMFA**'
 
     """
+
+    def __repr__(self):
+        return (
+            f"<TMRNAGene begin={self.begin} end={self.end} "
+            f"strand={'+1' if self.strand == 1 else '-1'} "
+            f"length={self.length} orf_length={self.orf_length} "
+            f"energy={self.energy:.2f}>"
+        )
 
     @property
     def permuted(self):
@@ -462,6 +483,14 @@ cdef class RNAFinder:
     """A configurable RNA gene finder.
     """
     cdef csw _sw
+    cdef double ps
+
+    def __repr__(self):
+        return (
+            f"<RNAFinder translation_table={self._sw.geneticcode} "
+            f"trna={bool(self._sw.trna)} tmrna={bool(self._sw.tmrna)} "
+            f"linear={bool(self._sw.linear)} ps={float(self.ps):.2f}>"
+        )
 
     def __init__(
         self,
@@ -470,8 +499,9 @@ cdef class RNAFinder:
         bint trna = True,
         bint tmrna = True,
         bint linear = False,
+        double ps = 100.0,
     ):
-        """__init__(self, translation_table=1, *, trna=True, tmrna=True, linear=False)\n--\n
+        """__init__(self, translation_table=1, *, trna=True, tmrna=True, linear=False, ps=100.0)\n--\n
 
         Create a new RNA finder.
 
@@ -482,6 +512,9 @@ cdef class RNAFinder:
                 the :attr:`pyaragorn.TRANSLATION_TABLES` constant for allowed
                 values.
 
+            ps (`float`, optional): Change scoring thresholds to `ps` percent of
+                default levels. Provide as a percentage (that is, 95 means 95%).
+                Defaults to 100.
         """
         default_sw(&self._sw)
         self._sw.trna = trna
@@ -489,6 +522,13 @@ cdef class RNAFinder:
         self._sw.linear = linear
         self._sw.f = stdout
         self._sw.verbose = False #True
+
+        # Validate and scale ps
+        if ps <= 0.0:
+            raise ValueError("'ps' must be positive")
+        self.ps = ps
+        psthresh = ps / 100.0
+        aragorn.change_thresholds(&self._sw, psthresh)
 
         if translation_table not in _TRANSLATION_TABLES:
             raise ValueError(f"invalid translation table: {translation_table!r}")
