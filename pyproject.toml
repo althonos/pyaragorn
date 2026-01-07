@@ -49,6 +49,7 @@ test = ["importlib-resources ; python_version < '3.9'"]
 
 [tool.scikit-build]
 build-dir = "build/{build_type}"
+wheel.py-api = "cp311"
 editable.rebuild = true
 editable.verbose = true
 sdist.exclude = [".github"]
@@ -72,7 +73,6 @@ cmake.build-type = "Debug"
 
 [tool.cibuildwheel]
 build-verbosity = 1
-free-threaded-support = false
 test-command = "python -m unittest pyaragorn.tests -v"
 test-extras = ["test"]
 
