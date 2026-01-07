@@ -485,13 +485,6 @@ cdef class RNAFinder:
     """
     cdef csw _sw
 
-    def __repr__(self):
-        return (
-            f"<RNAFinder translation_table={self._sw.geneticcode} "
-            f"trna={bool(self._sw.trna)} tmrna={bool(self._sw.tmrna)} "
-            f"linear={bool(self._sw.linear)} ps={float(self.ps):.2f}>"
-        )
-
     def __init__(
         self,
         int translation_table = 1,
@@ -540,6 +533,22 @@ cdef class RNAFinder:
             raise ValueError(f"invalid translation table: {translation_table!r}")
         self._sw.geneticcode = translation_table
 
+    def __repr__(self):
+        cdef str  ty   = type(self).__name__
+        cdef list args = []
+
+        if self.translation_table != 1:
+            args.append(f"{self.translation_table!r}")
+        if not self.trna:
+            args.append(f"trna={self.trna!r}")
+        if not self.tmrna:
+            args.append(f"tmrna={self.tmrna!r}")
+        if self.linear:
+            args.append(f"linear={self.linear!r}")
+        if self.threshold_scale != 1.0:
+            args.append(f"threshold_scale={self.threshold_scale!r}")
+        return f"{ty}({', '.join(args)})"
+
     @property
     def translation_table(self):
         """`int`: The translation table in use by this object.
@@ -550,19 +559,19 @@ cdef class RNAFinder:
     def trna(self):
         """`bool`: Whether tRNA detection is enabled.
         """
-        return self._sw.trna
+        return bool(self._sw.trna)
 
     @property
     def tmrna(self):
         """`bool`: Whether tmRNA detection is enabled.
         """
-        return self._sw.tmrna
+        return bool(self._sw.tmrna)
 
     @property
     def linear(self):
         """`bool`: Whether input sequences are assumed to have linear topology.
         """
-        return self._sw.linear
+        return bool(self._sw.linear)
 
     @property
     def threshold_scale(self):
