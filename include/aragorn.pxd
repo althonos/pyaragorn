@@ -43,7 +43,7 @@ cdef extern from "aragorn.h" nogil:
     const size_t ATBOND
 
     cdef bint space(char c)
-    cdef long int sq(long int pos) 
+    cdef long int sq(long int pos)
 
     cdef enum base:
         INSERT
@@ -273,6 +273,7 @@ cdef extern from "aragorn.h" nogil:
     # tmrna_tag_entry[NTAGMAX] tagdatabase
 
     char* aa(int* anticodon, csw* sw)
+    void change_thresholds(csw *sw, double psthresh)
     void bopt_fastafile(data_set *d, csw *sw)
     void batch_gene_set(data_set* d, int nt, csw* sw)
     char cbase(int c)
