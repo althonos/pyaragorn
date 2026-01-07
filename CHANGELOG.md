@@ -6,7 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/althonos/pyaragorn/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/althonos/pyaragorn/compare/v0.3.0...HEAD
+
+## [v0.3.0] - 2026-01-08
+[v0.3.0]: https://github.com/althonos/pyaragorn/compare/v0.2.0...v0.3.0
+
+### Added
+- `threshold_scale` configuration option in `RNAFinder` ([#2](https://github.com/althonos/pyaragorn/pull/2), by [@apcamargo](https://github.com/apcamargo)).
+- `__repr__` implementation to `TRNAGene` and `TMRNAGene` (by [@apcamargo](https://github.com/apcamargo)).
+- Various properties to `RNAFinder` allowing to access the options given in `__init__`.
+
+### Changed
+- Distribute wheels in Limited API mode for Python 3.11 and later.
 
 
 ## [v0.2.0] - 2025-06-02

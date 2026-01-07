@@ -4,7 +4,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "pyaragorn"
-version = "0.2.0"
+version = "0.3.0"
 description = "Cython bindings and Python interface to ARAGORN, a tRNA and mtRNA detection software."
 readme = "README.md"
 requires-python = ">=3.7"
