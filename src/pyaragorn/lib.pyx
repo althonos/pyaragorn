@@ -49,13 +49,7 @@ References:
 from cython.operator cimport postincrement, dereference
 from cpython.bytes cimport PyBytes_FromStringAndSize
 from cpython.exc cimport PyErr_CheckSignals
-from cpython.unicode cimport (
-    PyUnicode_KIND,
-    PyUnicode_DATA,
-    PyUnicode_1BYTE_KIND,
-    PyUnicode_GET_LENGTH,
-    # PyUnicode_READ,
-)
+from cpython.unicode cimport PyUnicode_AsASCIIString
 
 from libc.stdio cimport FILE, fopen, fdopen, fclose, fprintf, fputc, stdout, stderr
 from libc.stdlib cimport calloc, free
@@ -411,23 +405,19 @@ cdef class TMRNAGene(Gene):
 
 
 cdef class Cursor:
-    cdef object      obj
-    cdef const void* data
-    cdef int         kind
-    cdef size_t      length
-    cdef data_set    ds
+    cdef object                 obj
+    cdef const unsigned char[:] data
+    cdef int                    kind
+    cdef size_t                 length
+    cdef data_set               ds
 
     def __init__(self, obj):
-        cdef const unsigned char[::1] view
         if isinstance(obj, str):
-            self.kind = PyUnicode_KIND(obj)
-            self.data = PyUnicode_DATA(obj)
-            self.length = PyUnicode_GET_LENGTH(obj)
-        else:
-            view = obj
-            self.kind = PyUnicode_1BYTE_KIND
-            self.data = &view[0]
-            self.length = view.shape[0]
+            obj = PyUnicode_AsASCIIString(obj)
+
+        # get a memoryview to the data contents
+        self.data = obj
+        self.length = self.data.shape[0]
 
         # keep a reference to the data source
         self.obj = obj
@@ -436,8 +426,8 @@ cdef class Cursor:
         self.ds.filepointer = 0
         self.ds.ns = 0
         self.ds.nf = 0
-        self.ds.nextseq = 0L
-        self.ds.nextseqoff = 0L
+        self.ds.nextseq = 0
+        self.ds.nextseqoff = 0
         self.ds.seqstart = 0
         self.ds.seqstartoff = 0
         self.ds.ps = 0
@@ -447,13 +437,13 @@ cdef class Cursor:
         self.ds.gc = self._gc()
 
     cdef int _forward(self) noexcept nogil:
-        cdef Py_UCS4 x
-        cdef int     base
+        cdef char x
+        cdef int  base
 
         if self.ds.ps >= self.ds.psmax:
             return <int> aragorn.base.TERM
 
-        x = PyUnicode_READ(self.kind, self.data, self.ds.ps)
+        x = self.data[self.ds.ps]
         if x >= 128:
             return <int> aragorn.base.NOBASE
 
@@ -465,14 +455,14 @@ cdef class Cursor:
             return <int> aragorn.base.NOBASE
 
     cdef double _gc(self) noexcept nogil:
-        cdef long    i
-        cdef Py_UCS4 x
-        cdef int     base
-        cdef long    ngc  = 0
-        cdef long    ps   = 0
+        cdef long i
+        cdef char x
+        cdef int  base
+        cdef long ngc  = 0
+        cdef long ps   = 0
 
         for i in range(self.length):
-            x = PyUnicode_READ(self.kind, self.data, i)
+            x = self.data[i]
             base = aragorn.map[x]
             if base == -1:
                 break
