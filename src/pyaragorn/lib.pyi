@@ -66,7 +66,7 @@ class RNAFinder(Generic[G]):
         tmrna: Literal[False],
         trna: Literal[True] = True,
         linear: bool = False,
-        ps: float = 100.0,
+        threshold_scale: float = 1.0,
     ) -> None: ...
     @typing.overload
     def __init__(
@@ -76,7 +76,7 @@ class RNAFinder(Generic[G]):
         trna: Literal[False],
         tmrna: Literal[True] = True,
         linear: bool = False,
-        ps: float = 100.0,
+        threshold_scale: float = 1.0,
     ) -> None: ...
     @typing.overload
     def __init__(
@@ -86,8 +86,12 @@ class RNAFinder(Generic[G]):
         trna: bool = True,
         tmrna: bool = True,
         linear: bool = False,
-        ps: float = 100.0,
+        threshold_scale: float = 1.0,
     ) -> None: ...
+    @property
+    def threshold_scale(self) -> float: ...
+    @threshold_scale.setter
+    def threshold_scale(self, threshold_scale: float) -> None: ...
     def find_rna(
         self,
         sequence: Union[str, bytes, bytearray, Buffer],

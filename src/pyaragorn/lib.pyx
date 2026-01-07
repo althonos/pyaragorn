@@ -181,10 +181,11 @@ cdef class Gene:
 
     @property
     def energy(self):
-        """`float`: The approximated energy of the RNA structure.
+        """`float`: The approximated normalised energy of the RNA structure.
         """
         cdef csw sw
-        default_sw(&sw) # FIXME?
+        default_sw(&sw) # FIXME: should use the same parameters as the
+                        #        RNAFinder that produced the gene
         return aragorn.nenergy(&self._gene, &sw)
 
     @property
@@ -210,7 +211,7 @@ cdef class TRNAGene(Gene):
     def __repr__(self):
         return (
             f"<TRNAGene begin={self.begin} end={self.end} "
-            f"strand={'+1' if self.strand == 1 else '-1'} "
+            f"strand={self.strand:+} "
             f"length={self.length} anticodon={self.anticodon!r} "
             f"energy={self.energy:.2f}>"
         )
@@ -309,7 +310,7 @@ cdef class TMRNAGene(Gene):
     def __repr__(self):
         return (
             f"<TMRNAGene begin={self.begin} end={self.end} "
-            f"strand={'+1' if self.strand == 1 else '-1'} "
+            f"strand={self.strand:+} "
             f"length={self.length} orf_length={self.orf_length} "
             f"energy={self.energy:.2f}>"
         )
@@ -483,7 +484,6 @@ cdef class RNAFinder:
     """A configurable RNA gene finder.
     """
     cdef csw _sw
-    cdef double ps
 
     def __repr__(self):
         return (
@@ -499,7 +499,7 @@ cdef class RNAFinder:
         bint trna = True,
         bint tmrna = True,
         bint linear = False,
-        double ps = 100.0,
+        double threshold_scale = 1.0,
     ):
         """__init__(self, translation_table=1, *, trna=True, tmrna=True, linear=False, ps=100.0)\n--\n
 
@@ -512,9 +512,21 @@ cdef class RNAFinder:
                 the :attr:`pyaragorn.TRANSLATION_TABLES` constant for allowed
                 values.
 
-            ps (`float`, optional): Change scoring thresholds to `ps` percent of
-                default levels. Provide as a percentage (that is, 95 means 95%).
-                Defaults to 100.
+        Keyword Arguments:
+            trna (`bool`): Enable detection of tRNA genes. Set to `False` to
+                disable.
+            trmna (`bool`): Enable detection of tmRNA genes. Set to `False` to
+                disable.
+            linear (`bool`): Set to `True` to assume that the given sequences
+                have linear topology (no closed genomes).
+            threshold_scale (`float`, optional): Rescale scoring thresholds
+                from the default levels. Defaults to 1.0 (no rescaling). Set
+                to e.g. 0.95 to report possible pseudogenes by lowering
+                the threshold by 5%.
+
+        .. versionadded:: 0.3.0
+            The ``threshold_scale`` keyword argument.
+
         """
         default_sw(&self._sw)
         self._sw.trna = trna
@@ -522,17 +534,26 @@ cdef class RNAFinder:
         self._sw.linear = linear
         self._sw.f = stdout
         self._sw.verbose = False #True
-
-        # Validate and scale ps
-        if ps <= 0.0:
-            raise ValueError("'ps' must be positive")
-        self.ps = ps
-        psthresh = ps / 100.0
-        aragorn.change_thresholds(&self._sw, psthresh)
+        self.threshold_scale = threshold_scale
 
         if translation_table not in _TRANSLATION_TABLES:
             raise ValueError(f"invalid translation table: {translation_table!r}")
         self._sw.geneticcode = translation_table
+
+    @property
+    def threshold_scale(self):
+        """`float`: The scale used to change the default thresholds.
+
+        .. versionadded:: 0.3.0
+        
+        """
+        return self._sw.threshlevel
+
+    @threshold_scale.setter
+    def threshold_scale(self, double threshold_scale):
+        if threshold_scale <= 0.0:
+            raise ValueError(f"threshold_scale must be positive (got {threshold_scale!r})")
+        aragorn.change_thresholds(&self._sw, threshold_scale)
 
     def find_rna(self, object sequence):
         """Find RNA genes in the input DNA sequence.
