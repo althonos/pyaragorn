@@ -57,25 +57,24 @@ sdist.exclude = [".github"]
 if.state = "editable"
 cmake.build-type = "Debug"
 
-[[tool.scikit-build-overrides]]
+[[tool.scikit-build.overrides]]
 if.env.SCCACHE = true
 cmake.define.CMAKE_C_COMPILER_LAUNCHER = "sccache"
 cmake.define.CMAKE_CXX_COMPILER_LAUNCHER = "sccache"
 
-[[tool.scikit-build-overrides]]
+[[tool.scikit-build.overrides]]
 if.env.MOLD = true
 cmake.define.CMAKE_LINKER_TYPE = "mold"
 
+[[tool.scikit-build.overrides]]
+if.env.READTHEDOCS = "True"
+cmake.build-type = "Debug"
+
 [tool.cibuildwheel]
-before-build = "pip install scikit-build-core cython pycparser"
-build-frontend = { name = "pip", args = ["--no-build-isolation"] }
 build-verbosity = 1
 free-threaded-support = false
 test-command = "python -m unittest pyaragorn.tests -v"
 test-extras = ["test"]
-
-[tool.cibuildwheel.macos]
-environment = { MACOSX_DEPLOYMENT_TARGET = "10.12" }
 
 [tool.coverage.run]
 plugins = ["Cython.Coverage"]
