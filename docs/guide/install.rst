@@ -48,19 +48,19 @@ Steps to install on ArchLinux depend on your `AUR helper <https://wiki.archlinux
     $ aura -A python-pyaragorn
 
 
-.. Piwheels
-.. ^^^^^^^^
+Piwheels
+^^^^^^^^
 
-.. Pyrodigal works on Raspberry Pi computers (with NEON vectorization enabled!), 
-.. and pre-built wheels are compiled for `armv7l` platforms on piwheels.
-.. Run the following command to install these instead of compiling from source:
+Pyraragorn works on Raspberry Pi computers (with NEON vectorization enabled!), 
+and pre-built wheels are compiled for `armv7l` platforms on piwheels.
+Run the following command to install these instead of compiling from source:
 
-.. .. code:: console
+.. code:: console
 
-..    $ pip3 install pyaragorn --extra-index-url https://www.piwheels.org/simple
+   $ pip3 install pyaragorn --extra-index-url https://www.piwheels.org/simple
 
-.. Check the `piwheels documentation <https://www.piwheels.org/faq.html>`_ for 
-.. more information.
+Check the `piwheels documentation <https://www.piwheels.org/faq.html>`_ for 
+more information.
 
 
 GitHub + ``pip``

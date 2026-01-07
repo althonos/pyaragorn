@@ -43,6 +43,7 @@ classifiers = [
 "Coverage" = "https://codecov.io/gh/althonos/pyaragorn/"
 "Builds" = "https://github.com/althonos/pyaragorn/actions"
 "PyPI" = "https://pypi.org/project/pyaragorn"
+"PiWheels" = "https://piwheels.org/project/pyaragorn/"
 
 [project.optional-dependencies]
 test = ["importlib-resources ; python_version < '3.9'"]
