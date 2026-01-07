@@ -106,8 +106,9 @@ def pyaragorn_predict(rna_finder: pyaragorn.RNAFinder, genome: Path) -> set[Gene
                         kind = f"{kind}-?({'|'.join(prediction.amino_acids)})"
                     else:
                         kind = f"{kind}-{prediction.amino_acid}"
-                elif prediction.type == "tmRNA" and prediction.permuted:
-                    kind = "tmRNA*"
+                elif prediction.type == "tmRNA":
+                    mask = [["", "p"], ["*", "p*"]]
+                    kind = "tmRNA{}".format(mask[prediction.permuted][prediction.energy < 100.0])
                 gene: namedtuple = Gene(record.id,
                                         kind,
                                         prediction.begin,
@@ -197,7 +198,7 @@ def main():
                          ps=ps)
         aragorn_genes: set[dict] = parse_txt_output(txt_path=aragorn_txt_file)
         # Predict pyaragorn
-        rna_finder = pyaragorn.RNAFinder(11, linear=linear, ps=ps)
+        rna_finder = pyaragorn.RNAFinder(11, linear=linear, threshold_scale=ps/100.0)
         pyaragorn_genes: set[dict] = pyaragorn_predict(rna_finder=rna_finder,
                                                        genome=genome)
 
