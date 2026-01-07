@@ -501,7 +501,7 @@ cdef class RNAFinder:
         bint linear = False,
         double threshold_scale = 1.0,
     ):
-        """__init__(self, translation_table=1, *, trna=True, tmrna=True, linear=False, ps=100.0)\n--\n
+        """__init__(self, translation_table=1, *, trna=True, tmrna=True, linear=False, threshold_scale=1.0)\n--\n
 
         Create a new RNA finder.
 
@@ -541,11 +541,35 @@ cdef class RNAFinder:
         self._sw.geneticcode = translation_table
 
     @property
+    def translation_table(self):
+        """`int`: The translation table in use by this object.
+        """
+        return self._sw.geneticcode
+
+    @property
+    def trna(self):
+        """`bool`: Whether tRNA detection is enabled.
+        """
+        return self._sw.trna
+
+    @property
+    def tmrna(self):
+        """`bool`: Whether tmRNA detection is enabled.
+        """
+        return self._sw.tmrna
+
+    @property
+    def linear(self):
+        """`bool`: Whether input sequences are assumed to have linear topology.
+        """
+        return self._sw.linear
+
+    @property
     def threshold_scale(self):
         """`float`: The scale used to change the default thresholds.
 
         .. versionadded:: 0.3.0
-        
+
         """
         return self._sw.threshlevel
 
