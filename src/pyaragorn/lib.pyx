@@ -106,6 +106,8 @@ cdef inline long int sq(data_set* d, long int pos) nogil:
 
 # --- Constants ----------------------------------------------------------------
 
+import functools
+
 cdef set _TRANSLATION_TABLES  = set(range(1, 7)) | set(range(9, 17)) | set(range(21, 27)) | {29, 30} | {32, 33}
 
 __version__ = PROJECT_VERSION
@@ -532,6 +534,16 @@ cdef class RNAFinder:
         if translation_table not in _TRANSLATION_TABLES:
             raise ValueError(f"invalid translation table: {translation_table!r}")
         self._sw.geneticcode = translation_table
+
+    def __reduce__(self):
+        return functools.partial(
+            type(self),
+            translation_table=self.translation_table,
+            trna=self.trna,
+            tmrna=self.tmrna,
+            linear=self.linear,
+            threshold_scale=self.threshold_scale,
+        ), ()
 
     def __repr__(self):
         cdef str  ty   = type(self).__name__
