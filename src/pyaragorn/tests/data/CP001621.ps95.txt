@@ -1,0 +1,101 @@
+>CP001621.1 Mycoplasma mycoides subsp. capri str. GM12 transgenic clone tetM-lacZ, complete genome
+33 genes found
+1   tRNA-Leu                c[87124,87207]	116.6	35  	(tag)
+gggggattggcggaattggcagacgcactagacttaggatctagcgtctttaacgtaagggttcaagtcccttatcccccacca
+(((((((ss(((ddddddddddd)))s(((((ccAAAcc)))))vvvvvvvvvvvv(((((ttttttt))))))))))))
+2   tRNA-Lys                c[87210,87285]	124.1	34  	(ttt)
+gactcgttagctcagccggtagagcaactggcttttaaccagtgggtccggggttcgaatccccgacgagtcacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+3   tRNA-Lys              c[139027,139102]	117.7	34  	(ctt)
+gtctgattagcgcaactggcagagcaactgactcttaatcagtgggttgtgggttcgattcccacatcaggcacca
+(((((((ss((.(dddddddd).))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+4   tmRNA                  [198037,198447]	109.7		87,173	AEKNEENFEMPAFMINNASAGANYMFA**
+ggggatgtcatggatttgacaggatat|gtatcttggacgcgagttcgattctcgccatctccacca
+(((((((dddddddddddd((((((((|))))))))vvv(((((ttttttt))))))))))))aaaa
+5   tRNA-Ser               [355003,355092]	119.7	35  	(gct)
+gggttaatactcaagttggtgaagaggacaccctgctaaggtgttaggtcggtctccggcgcgagggttcgagtccctcttaacccgcca
+(((((((ss(((ddddddddddd)))((((((ccAAAcc))))))ss((((vvvvv))))ss(((((ttttttt))))))))))))
+6   tRNA-Gly               [371077,371150]	118.5	33  	(tcc)
+gcaggtgtagtttaatggcagaacttcagccttccaagctgattgtgagggttcgattcccttcacctgctcca
+(((((((ss((((ddddddd))))s(((((ccAAAcc)))))vvvv(((((ttttttt))))))))))))
+7   tRNA-Arg               [459024,459100]	118.0	35  	(tct)
+gcccatgtagctcagtaggatagagcacgcgccttctaagcgtgaggtcggaagttcgagccttctcgtgggcacca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+8   tRNA-Leu               [521320,521404]	117.7	35  	(caa)
+gcccttttggcggaattggcagacgcattagactcaaaatctaacgaagaaattcgtatcggttcgaccccgataaagggcacca
+(((((((ss(((ddddddddddd)))s(((((ccAAAcc)))))((((vvvv))))s(((((ttttttt))))))))))))
+9   tRNA-Leu              c[611707,611795]	119.4	35  	(taa)
+ccccaagtggcggaataggtagacgcattggacttaaaatccaacgggcttaatatcctgtgccggttcaagtccggccttggggacca
+(((((((ss(((ddddddddddd)))s(((((ccAAAcc)))))((((vvvvvvvv))))s(((((ttttttt))))))))))))
+10  tRNA-Lys              c[611806,611881]	124.1	34  	(ttt)
+gactcgttagctcagccggtagagcaactggcttttaaccagtgggtccggggttcgaatccccgacgagtcacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+11  tRNA-Gln              c[611886,611960]	116.0	33  	(ttg)
+tgggctatagccaagcggtaaggcaagggactttgactccctcatgcgccggttcgaatcctgctagcccaacca
+(((((((ss(((ddddddddd)))s(((((ccAAAcc)))))vvvvv((.((ttttttt)).)))))))))
+12  tRNA-Tyr              c[611967,612050]	120.5	35  	(gta)
+ggaggggtagcgaagtggctaaacgcgggtggctgtaacccacttccttacggttcgggggttcgaatccctccccctccacca
+(((((((ss(((ddddddddddd)))((((((ccAAAcc))))))vvvvvvvvvvv(((((ttttttt))))))))))))
+13  tRNA-Thr              c[612057,612132]	119.0	34  	(agt)
+gctgacttagctcagttggtagagcaattgactagtaatcaataggtcgaaggttcaaatcctttagtcagcacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+14  tRNA-Trp              c[763746,763820]	118.0	33  	(cca)
+aggagagtagttcaatggtagaacgtcggtctccaaaaccgagcgttgagggttcgattcctttctctcctgcca
+(((((((ss((((ddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+15  tRNA-SeC              c[763858,763933]	118.2	34  	(tca)
+aggggcatagttcagtaggtagaacatcggtcttcaaaaccgagtgtcacgagttcgagtcttgttgcccctgcca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+16  tRNA-His              c[766239,766314]	113.8	34  	(gtg)
+gcgtaggtggtgaagtggttaacacatcaggttgtggctctgacatgcgcgggttcgatccccgttctacgcccca
+(((((((ss(((dddddddddd)))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+17  tRNA-Leu              c[777135,777209]	 96.5	31  	(cag)
+cttttgttggtgaaggaatacatattaattcagaatttttaaatgatcttgacagagttcaagctttacaagtga
+(.(((((ss(((dddddd)))s((..((ccAAAcc))..))vvvvvvvvvvvv((((tttttt))))))))).)
+18  tRNA-Ile              c[778452,778528]	120.9	35  	(gat)
+cggaatatagctcagctggttagagcactccgctgataacggagaggtcgttggttcaagtccaattattccgacca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+19  tRNA-Thr              c[813006,813081]	121.2	34  	(tgt)
+gctgacttagctcagcaggcagagcaactgacttgtaatcagtaggtcgtaggttcgattcctatagtcagcacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+20  tRNA-Val              c[813094,813169]	122.2	34  	(tac)
+ggagtgttagctcagctgggagagctcctgccttacaagcaggcggtcataggttcaagtcctatacactccacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+21  tRNA-Glu              c[813177,813252]	119.7	34  	(ttc)
+ggcctgttggtgaagcggttaacacacacggttttcatccgtggacacacgggttcgaaccccgtacaggctacca
+(((((((ss(((dddddddddd)))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+22  tRNA-Asn              c[813260,813335]	123.7	34  	(gtt)
+ggctttttagctcagcaggtagagcaaccggctgttaaccggtttgtcacaggttcgagccctgtaaaagccgcca
+(((((((ss((((dddddddd))))((((((ccAAAcc))))))vvvv(((((ttttttt))))))))))))
+23  tRNA-Arg               [856360,856436]	117.7	35  	(acg)
+gcgcccgtagatcaattggatagatcgcttgactacggatcaaaaggttgggggttcgagtccctccgggcgcacca
+(((((((ss((((ddddddddd))))s.((((ccAAAcc)))).vvvvv(((((ttttttt))))))))))))
+24  tRNA-Pro               [856484,856560]	121.2	35  	(tgg)
+cgggaagtggctcagtttggtagagcattcggtttgggaccgaagggtcgcaggttcaaatcctgtcttcccgacca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+25  tRNA-Ala               [856571,856646]	121.1	34  	(tgc)
+gggcccttagctcagctgggagagcacctgccttgcacgcagggggtcgacggttcgatcccgttagggtccacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+26  tRNA-Met               [856651,856727]	120.1	35  	(cat)
+ggcggggtagctcagttggttagagcgttcggttcatacccgaaaggtcgagagttcaactctctcccccgctacca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+27  tRNA-Met               [856739,856815]	122.2	35  	(cat)
+ggacctttagctcagttggttagagcatccggctcataaccggacggtcattggttcaagtccaataaggtccacca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+28  tRNA-Ser               [856858,856950]	117.2	37  	(tga)
+ggaagattacccaagtccggctgaagggatcggtcttgaaaaccgagagtcggggaaacccgagcgggggttcgaatccctcatcttccgcca
+(((((((ss(((.ddddddddddd.)))s(((((ccAAAcc)))))sss(((((vvvv)))))ss(((((ttttttt))))))))))))
+29  tRNA-Met               [856973,857048]	123.7	34  	(cat)
+cgcggggtagagcagttggtagctcgccgggctcataacccggaggccgcaggttcgagtcctgcccccgcaacca
+.((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))).
+30  tRNA-Asp               [857051,857127]	123.9	35  	(gtc)
+ggccccatagcgaagttggttatcgcgcctccctgtcacggaggagatcacgggttcgagtcccgttggggtcgcca
+(((((((ss((((ddddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+31  tRNA-Phe               [857136,857211]	119.3	34  	(gaa)
+ggtcgtgtagctcagtcggtagagcagcagactgaagctctgcgtgtcggcggttcaattccgtccacgaccacca
+(((((((ss((((dddddddd))))s(((((ccAAAcc)))))vvvvv(((((ttttttt))))))))))))
+32  tRNA-Cys               [975123,975197]	117.5	34  	(gca)
+ggcaatatagccaagcggctaaggcatgggtctgcaacaccctgatcgtcggttcgaatccgactattgcctcca
+(((((((ss(((dddddddddd)))s.((((ccAAAcc)))).vvvv(((((ttttttt))))))))))))
+33  tRNA-Tyr            c[1005763,1005849]	 96.5	35  	(ata)
+attattacttgattaattgtaaatccaattaactataaattaatttctaatgtatgaggtacattagttctaggaccaataatagga
+.((((((sss((((ddddddd))))s((((((ccAAAcc))))))(((.(vvvv).)))ssss((.(tttttttt).)))))))).
