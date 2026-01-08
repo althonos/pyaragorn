@@ -23,6 +23,7 @@ check() {
     local machine=$(python -c 'import platform; print(platform.machine())')
     whl="${srcdir}/${_name}-${pkgver}${_extraver}/dist/${_name}-${pkgver}${_extraver}-cp311-abi3-linux_${machine}.whl"
 
+    if [ -e "${srcdir}/env" ]; then rm -rd "${srcdir}/env"; fi
     python -m venv --symlinks --system-site-packages "${srcdir}/env"
     source "${srcdir}/env/bin/activate"
     python -m installer "$whl"
